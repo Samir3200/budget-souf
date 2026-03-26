@@ -1,0 +1,18 @@
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+
+export function middleware(request: NextRequest) {
+  const userId = request.cookies.get('user_id');
+
+  // Si on essaie d'aller sur le dashboard sans être connecté
+  if (request.nextUrl.pathname.startsWith('/dashboard') && !userId) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
+
+  return NextResponse.next();
+}
+
+// On définit sur quelles pages le middleware doit agir
+export const config = {
+  matcher: ['/dashboard/:path*'],
+};
