@@ -1,5 +1,13 @@
 "use server";
 
+// Action pour modifier le montant d'une transaction
+export async function updateTransaction(id: number, newAmount: number) {
+  await db.update(transactions)
+    .set({ montant: newAmount.toString() })
+    .where(eq(transactions.id, id));
+  revalidatePath("/dashboard");
+}
+
 import { db } from "@/app/db"; // Votre instance Drizzle
 import { categories, transactions, users } from "@/app/db/schema";
 import { revalidatePath } from "next/cache";
@@ -33,10 +41,11 @@ export async function seedCategories() {
   if (categoriesExistantes.length === 0) {
     await db.insert(categories).values([
       { nom: "Alimentation", budgetMensuelPrevu: "400", isRevenue: false, userId: 1 },
-      { nom: "Loyer & Charges", budgetMensuelPrevu: "800", isRevenue: false, userId: 1 },
-      { nom: "Transport", budgetMensuelPrevu: "100", isRevenue: false, userId: 1 },
+      { nom: "Loyer & Charges", budgetMensuelPrevu: "910", isRevenue: false, userId: 1 },
+      { nom: "Transport", budgetMensuelPrevu: "150", isRevenue: false, userId: 1 },
       { nom: "Loisirs", budgetMensuelPrevu: "150", isRevenue: false, userId: 1 },
       { nom: "Salaire", budgetMensuelPrevu: "0", isRevenue: true, userId: 1 },
+      { nom: "Remboursement", budgetMensuelPrevu: "0", isRevenue: true, userId: 1 },
     ]);
   }
 }
@@ -64,9 +73,10 @@ export async function ensureCategoriesExist() {
     }
     await db.insert(categories).values([
       { nom: "Alimentation", budgetMensuelPrevu: "400", isRevenue: false, userId },
-      { nom: "Loyer & Charges", budgetMensuelPrevu: "800", isRevenue: false, userId },
-      { nom: "Transport", budgetMensuelPrevu: "100", isRevenue: false, userId },
+      { nom: "Loyer & Charges", budgetMensuelPrevu: "910", isRevenue: false, userId },
+      { nom: "Transport", budgetMensuelPrevu: "150", isRevenue: false, userId },
       { nom: "Loisirs", budgetMensuelPrevu: "150", isRevenue: false, userId },
+      { nom: "Remboursement", budgetMensuelPrevu: "0", isRevenue: true, userId },
       { nom: "Salaire", budgetMensuelPrevu: "0", isRevenue: true, userId },
     ]);
   }
