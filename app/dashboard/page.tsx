@@ -20,7 +20,8 @@ export default async function Dashboard() {
       <div className="max-w-6xl mx-auto space-y-8">
         {/* EN-TÊTE : TITRE ET SOLDE GLOBAL */}
         <header className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
+          <div className="flex items-center gap-3">
+            <img src="/logo%20budget.png" alt="Logo Budget" className="h-12 w-12 object-contain" />
             <h1 className="text-4xl font-black text-slate-900 tracking-tight">Maîtrise Budget</h1>
           </div>
           <div className="bg-white border-2 border-slate-100 shadow-sm rounded-3xl p-6 min-w-[280px]">
