@@ -23,6 +23,9 @@ export default async function Dashboard() {
           <div className="flex items-center gap-3">
             <img src="/logo%20budget.png" alt="Logo Budget" className="h-12 w-12 object-contain" />
             <h1 className="text-4xl font-black text-slate-900 tracking-tight">Maîtrise Budget</h1>
+            <form method="POST" action="/api/logout" className="ml-4">
+              <button type="submit" className="bg-rose-100 text-rose-600 font-bold px-4 py-2 rounded-xl hover:bg-rose-200 transition-all text-xs">Se déconnecter</button>
+            </form>
           </div>
           <div className="bg-white border-2 border-slate-100 shadow-sm rounded-3xl p-6 min-w-[280px]">
             <p className="text-xs font-bold text-slate-400 uppercase tracking-[0.2em] mb-2">Solde Disponible</p>
