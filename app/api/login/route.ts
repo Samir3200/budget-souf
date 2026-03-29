@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
   }
 
   // Authentification réussie : on pose un cookie (simple, à sécuriser en prod)
-  const response = NextResponse.redirect(new URL("/dashboard", req.url));
+  const response = NextResponse.redirect(new URL("/dashboard", req.url), 303);
   response.cookies.set("user_id", String(user.id), {
     httpOnly: true,
     path: "/",
